@@ -7,13 +7,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final int days = 30;
      //data types
-  //String
-  //double
-  // bool
-  //num
-  //var
-  //const
-  //final
+    //String
+    //double
+    // bool
+    //num
+    //var
+    //const
+    //final
 
     return Scaffold(
         appBar: AppBar(
@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
         ),
         body:Center(
           child: Container(
-            child:Text("Welcome to $days days of flutter")
+            child: Text("Welcome to $days days of flutter")
         )
       ),
       drawer: Drawer(),
