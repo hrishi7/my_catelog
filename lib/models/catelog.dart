@@ -1,5 +1,9 @@
+class CatalogModel {
+  static List<Item> items = [];
+}
+
 class Item {
-  final String id;
+  final int id;
   final String name;
   final String desc;
   final num price;
@@ -13,14 +17,22 @@ class Item {
       required this.price,
       required this.color,
       required this.image});
-}
 
-final products = [
-  Item(
-      id: "codepur543",
-      name: "product1",
-      desc: "sample",
-      price: 999,
-      color: "#080999",
-      image: "")
-];
+  factory Item.fromMap(Map<String, dynamic> map) {
+    return Item(
+        id: map["id"],
+        name: map["name"],
+        desc: map["desc"],
+        price: map["price"],
+        color: map["color"],
+        image: map["image"]);
+  }
+  toMap() => {
+        "id": id,
+        "name": name,
+        "desc": desc,
+        "price": price,
+        "color": color,
+        "image": image,
+      };
+}
