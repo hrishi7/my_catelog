@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:convert';
+import 'package:my_catelog/widgets/home_widgets/catalog_header.dart';
+import 'package:my_catelog/widgets/home_widgets/catalog_list.dart';
+import 'package:velocity_x/velocity_x.dart';
+
 import 'package:my_catelog/models/catelog.dart';
-import 'package:my_catelog/widgets/drawer.dart';
-import 'package:my_catelog/widgets/item_widget.dart';
+import 'package:my_catelog/widgets/themes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,23 +38,21 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Catelog App"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: (CatalogModel.items.isNotEmpty)
-            ? ListView.builder(
-                itemCount: CatalogModel.items.length,
-                itemBuilder: (context, index) {
-                  return ItemWidget(item: CatalogModel.items[index]);
-                },
-              )
-            : const Center(
-                child: CircularProgressIndicator(),
-              ),
-      ),
-      drawer: const MyDrawer(),
-    );
+        backgroundColor: MyTheme.creamColor,
+        body: SafeArea(
+          child: Container(
+            padding: Vx.m32,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const CatalogHeader(),
+                if (CatalogModel.items.isNotEmpty)
+                  const CatalogList().py16().expand()
+                else
+                  const CircularProgressIndicator().centered().py16().expand(),
+              ],
+            ),
+          ),
+        ));
   }
 }
