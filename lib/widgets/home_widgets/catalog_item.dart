@@ -3,7 +3,6 @@ import 'package:my_catelog/widgets/home_widgets/catalog_image.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'package:my_catelog/models/catelog.dart';
-import 'package:my_catelog/widgets/themes.dart';
 
 class CatalogItem extends StatelessWidget {
   final Item catalog;
@@ -15,14 +14,14 @@ class CatalogItem extends StatelessWidget {
         child: Row(
       children: [
         Hero(
-          tag: Key(catalog.id.toString()),
-          child: CatalogImage(image: catalog.image)),
+            tag: Key(catalog.id.toString()),
+            child: CatalogImage(image: catalog.image)),
         Expanded(
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                catalog.name.text.lg.color(MyTheme.darkBluishColor).bold.make(),
+                catalog.name.text.lg.color(context.accentColor).bold.make(),
                 catalog.desc.text.make(),
                 10.heightBox,
                 ButtonBar(
@@ -34,15 +33,16 @@ class CatalogItem extends StatelessWidget {
                         onPressed: () {},
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                                MyTheme.darkBluishColor),
+                                // ignore: deprecated_member_use
+                                context.theme.buttonColor),
                             shape: MaterialStateProperty.all(
                                 const StadiumBorder())),
-                        child: "Buy".text.make())
+                        child: "Add To cart".text.make())
                   ],
                 ).pOnly(right: 8.0)
               ]),
         )
       ],
-    )).white.roundedLg.square(150).make().py(16);
+    )).color(context.cardColor).roundedLg.square(150).make().py(16);
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:my_catelog/models/catelog.dart';
-import 'package:my_catelog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeDetailPage extends StatelessWidget {
@@ -13,7 +12,7 @@ class HomeDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: Container(
-          color: Colors.white,
+          color: context.cardColor,
           child: ButtonBar(
             alignment: MainAxisAlignment.spaceBetween,
             buttonPadding: EdgeInsets.zero,
@@ -23,16 +22,19 @@ class HomeDetailPage extends StatelessWidget {
                       onPressed: () {},
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
-                              MyTheme.darkBluishColor),
+                              // ignore: deprecated_member_use
+                              context.theme.buttonColor),
                           shape:
                               MaterialStateProperty.all(const StadiumBorder())),
-                      child: "Buy".text.make())
-                  .wh(100, 50)
+                      child: "Add To Cart".text.make())
+                  .wh(120, 50)
             ],
           ).p32(),
         ),
-        appBar: AppBar(),
-        backgroundColor: MyTheme.creamColor,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+        ),
+        backgroundColor: context.canvasColor,
         body: SafeArea(
             bottom: false,
             child: Column(children: [
@@ -46,16 +48,20 @@ class HomeDetailPage extends StatelessWidget {
                       arcType: VxArcType.CONVEY,
                       edge: VxEdge.TOP,
                       child: Container(
-                          color: Colors.white,
+                          color: context.cardColor,
                           width: context.screenWidth,
                           child: Column(
                             children: [
                               catalog.name.text.xl4
-                                  .color(MyTheme.darkBluishColor)
+                                  .color(context.accentColor)
                                   .bold
                                   .make(),
                               catalog.desc.text.xl.make(),
                               10.heightBox,
+                              "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document"
+                                  .text
+                                  .make()
+                                  .p8()
                             ],
                           ).py64())))
             ])));
