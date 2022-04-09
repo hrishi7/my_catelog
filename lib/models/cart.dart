@@ -1,8 +1,12 @@
-
-
 import 'package:my_catelog/models/catelog.dart';
 
 class CartModel {
+  static final cartModel = CartModel._internal();
+
+  CartModel._internal();
+
+  factory CartModel() => cartModel;
+
   late CatalogModel _catalog;
 
   // Collection of the IDs
@@ -10,22 +14,22 @@ class CartModel {
 
   CatalogModel get catalg => _catalog;
 
-  set catalog(CatalogModel newCatalog){
+  set catalog(CatalogModel newCatalog) {
     // ignore: unnecessary_null_comparison
     assert(newCatalog != null);
     _catalog = newCatalog;
   }
 
-  List<Item> get items => _itemIds.map((id)=> _catalog.getById(id)).toList();
+  List<Item> get items => _itemIds.map((id) => _catalog.getById(id)).toList();
 
-  num get totalPrice => items.fold(0, (total, current) => total + current.price);
+  num get totalPrice =>
+      items.fold(0, (total, current) => total + current.price);
 
-  void add(Item item){
+  void add(Item item) {
     _itemIds.add(item.id);
   }
 
-  void remove(Item item){
+  void remove(Item item) {
     _itemIds.remove(item.id);
   }
-
 }
